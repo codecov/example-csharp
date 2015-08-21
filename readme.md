@@ -64,9 +64,9 @@ If you use a CI, such as AppVeyor for example, you need to modify the 'after_tes
 ``` YAML
 after_test: 
     - .\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll" -filter:"+[MyProject]*  -[MyProject]MyProject.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml
-     - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
-- pip install codecov
-- codecov -f "MyProject_coverage.xml"
+    - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+    - pip install codecov
+    - codecov -f "MyProject_coverage.xml"
 ```
 
 [1]: https://codecov.io/
