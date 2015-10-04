@@ -69,6 +69,39 @@ after_test:
     - codecov -f "MyProject_coverage.xml"
 ```
 
+We recently incorporated codecov.io into [DotNetAnalyzers/StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers). Based on this experience, I recommend the following changes to the documentation.
+
+### Combine test and code coverage stages
+
+The steps to do this are elusive, but relatively straightforward when you see them.
+
+1. Add the `-returntargetcode` argument to OpenCover.Console
+1. Change the `after_test` section to `test_script`
+
+:thought_balloon: It might make sense to make a note that the code coverage gathering process may be run as a separate build step for users who are unable to or do not wish to run their complete automated testing through OpenCover. Users will want to integrate Codecov *either* in their `test_script` section *or* in their `after_test` section, but not both.
+
+### Include information for XUnit users
+
+Users working with XUnit will need to modify their OpenCover call as follows:
+
+1. The `-target` argument becomes the following:
+
+  ```
+  -target:"%xunit20%\xunit.console.x86.exe"
+  ```
+
+1. The `-targetargs` argument becomes the following (you may want to replace our target assembly path with the one in your original sample; I wasn't familiar enough with the escape sequences for spaces to do it myself):
+
+  ```
+  -targetargs:"C:\projects\stylecopanalyzers\StyleCop.Analyzers\StyleCop.Analyzers.Test\bin\Debug\StyleCop.Analyzers.Test.dll -noshadow -appveyor"
+  ```
+
+
+### Sample project
+
+- [DotNetAnalyzers/StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
+
+
 [1]: https://codecov.io/
 [2]: https://twitter.com/codecov
 [3]: mailto:hello@codecov.io
