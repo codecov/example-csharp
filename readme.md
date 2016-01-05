@@ -49,7 +49,7 @@ The PowerShell script contains two lines: one to download Codecov's script and t
  
 ```PowerShell
 (New-Object System.Net.WebClient).DownloadFile("https://codecov.io/bash", ".\CodecovUploader.sh")
-.\CodecovUploader.sh -t <your upload token> -X gcov
+.\CodecovUploader.sh -f "MyProject_coverage.xml -t <your upload token> -X gcov
 ```
 
 Of course, you need to replace the `<your upload token>` with your private Codecov upload token.
