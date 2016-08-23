@@ -4,8 +4,6 @@ Codecov C# Example
 | [https://codecov.io][1] | [@codecov][2] | [hello@codecov.io][3] |
 | ----------------------- | ------------- | --------------------- |
 
-This repository serves as an **example** on how to use [Codecov Global][4] for C#.
-
 ## Installation
 
 You need to add the [OpenCover][5] nuget package to your Visual Studio solution which is used to generate code coverage analysis:
