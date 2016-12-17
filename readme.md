@@ -26,17 +26,17 @@ Let's assume your C# solution has the following folder structure:
 To generate code coverage analysis, execute the following comment from a command prompt in your solution's root:
 
 ```PowerShell
-.\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll" -filter:"+[MyProject]*  -[MyProject]MyProject.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml
+.\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll" -filter:"+[MyProject]*  -[MyProject]MyProject.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml
 ```
 
 This command makes a few assumptions which you will most likely have to adjust to meet your needs:
 
 1. Use Visual Studio 2013
-2. Use OpenCover v4.6.166, which is the latest version as of this writing, to generate code coverage. Of course you will need to adjust the path to the OpenCover package when new versions are available.
+2. Use OpenCover v4.6.519, which is the latest version as of this writing, to generate code coverage. Of course you will need to adjust the path to the OpenCover package when new versions are available.
 3. Unit tests are compiled in a DLL called .\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll (replace 'Debug' with 'Release if you compile in 'Release' mode).
 4. Code coverage will include all classes, methods and properties under the [MyProject] namespace except [MyProject]MyProject.Properties. These properties, typically, include your project version number, compiler options, etc. and therefore should be excluded from the code coverage report.
-4. Any class decorated with the 'ExcludeFromCodeCoverage' attribute is automatically excluded from the coverage analysis.
-5. Code coverage analysis is written to a XML file called MyProject_coverage.xml  
+5. Any class decorated with the 'ExcludeFromCodeCoverage' attribute is automatically excluded from the coverage analysis.
+6. Code coverage analysis is written to a XML file called MyProject_coverage.xml  
 
 Now that you have generated your code coverage analysis, you must download Codecov's "upload script" and use it to upload your code coverage file to CodeCov.
 
@@ -61,7 +61,7 @@ If you use a CI, such as AppVeyor for example, you need to modify the 'after_tes
 
 ``` YAML
 after_test: 
-    - .\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll" -filter:"+[MyProject]*  -[MyProject]MyProject.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml
+    - .\packages\OpenCover.4.6.519\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyProject Unit Tests\bin\Debug\MyProject.UnitTests.dll" -filter:"+[MyProject]*  -[MyProject]MyProject.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml
     - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
     - pip install codecov
     - codecov -f "MyProject_coverage.xml"
