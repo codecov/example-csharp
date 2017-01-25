@@ -93,6 +93,10 @@ Users working with XUnit will need to modify their OpenCover call as follows:
   ```
   -targetargs:"C:\projects\stylecopanalyzers\StyleCop.Analyzers\StyleCop.Analyzers.Test\bin\Debug\StyleCop.Analyzers.Test.dll -noshadow -appveyor"
   ```
+  
+  
+### Important notes
+- `BuildOptions` should not include `"portable"` option on the dotnetcore test project's `project.json` file.
 
 
 ### Sample project
