@@ -1,11 +1,14 @@
-version: 1.0.{build}
+image: Visual Studio 2015
+
 before_build:
-  - nuget restore
+- nuget restore
+- choco install opencover.portable
+- choco install codecov
+
 build:
-  project: CodeCoveProject.sln 
+  project: CodecovProject.sln
   verbosity: minimal
-after_test: 
-    - packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\MyUnitTests\bin\Debug\MyUnitTests.dll" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml 
-    - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
-    - pip install codecov
-    - codecov -f "MyProject_coverage.xml"	
+
+test_script:
+- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\MyUnitTests\bin\Debug\MyUnitTests.dll -noshadow" -filter:"+[UnitTestTargetProject*]* -[MyUnitTests*]*" -output:".\MyProject_coverage.xml"
+- codecov -f "MyProject_coverage.xml

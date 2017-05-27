@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnitTestTargetProject
+﻿namespace UnitTestTargetProject
 {
     public class MyTargetClass
     {
@@ -12,10 +6,12 @@ namespace UnitTestTargetProject
         {
             return pintFirstNumber + pintSecondNumber;
         }
+
         public int SubractNumbers(int pintFirstNumber, int pintSecondNumber)
         {
             return pintFirstNumber - pintSecondNumber;
         }
+
         public int DivideNumbers(int pintFirstNumber, int pintSecondNumber)
         {
             return pintFirstNumber / pintSecondNumber;
