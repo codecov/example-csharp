@@ -1,28 +1,28 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UnitTestTargetProject;
+﻿using UnitTestTargetProject;
+using Xunit;
 
 namespace MyUnitTests
 {
-    [TestClass]
     public class MyTargetClassTests
     {
-        [TestMethod]
+        [Fact]
         public void VerifySummation()
         {
-            int intFirstNumber = 15, intsecondNumber = 10;
-            MyTargetClass objTargetClass = new MyTargetClass();
-            int intResult = objTargetClass.AddNumbers(intFirstNumber, intsecondNumber);
-            Assert.AreEqual(15 + 10, intResult, "Summation method is not written well.");
+            const int intFirstNumber = 15;
+            const int intsecondNumber = 10;
+            var objTargetClass = new MyTargetClass();
+            var intResult = objTargetClass.AddNumbers(intFirstNumber, intsecondNumber);
+            Assert.Equal(15 + 10, intResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void VerifySubtraction()
         {
-            int intFirstNumber = 15, intsecondNumber = 10;
-            MyTargetClass objTargetClass = new MyTargetClass();
-            int intResult = objTargetClass.SubractNumbers(intFirstNumber, intsecondNumber);
-            Assert.AreEqual(15 - 10, intResult, "Subtraction method is not written well.");
+            const int intFirstNumber = 15;
+            const int intsecondNumber = 10;
+            var objTargetClass = new MyTargetClass();
+            var intResult = objTargetClass.SubractNumbers(intFirstNumber, intsecondNumber);
+            Assert.Equal(15 - 10, intResult);
         }
     }
 }
