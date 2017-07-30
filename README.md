@@ -6,6 +6,10 @@
 [![AppVeyor](https://img.shields.io/appveyor/ci/stevepeak/example-csharp.svg)](https://ci.appveyor.com/project/stevepeak/example-csharp/branch/master)
 [![codecov](https://codecov.io/gh/codecov/example-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/codecov/example-csharp)
 
+## Solution
+
+Start by restoring the nuget packages and building the solution.
+
 ## Generate the Coverage File
 
 Coverage is generated using [OpenCover](https://github.com/OpenCover/opencover). You can obtain it from [NuGet](https://www.nuget.org/packages/opencover) or [Chocolatey](https://chocolatey.org/packages/opencover.portable). If we run the following command in PowerShell to install OpenCover via Chocolatey, 
