@@ -1,17 +1,28 @@
-# Codecov C# Example
-
-| [https://codecov.io](https://codecov.io/) | [@codecov](https://twitter.com/codecov) | [hello@codecov.io](mailto:hello@codecov.io) |
-| ----------------------- | ------------- | --------------------- |
+# [Codecov][1] C# Example
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/stevepeak/example-csharp.svg)](https://ci.appveyor.com/project/stevepeak/example-csharp/branch/master)
 [![codecov](https://codecov.io/gh/codecov/example-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/codecov/example-csharp)
 
-## Solution
+## Guide
+### AppVeyor Setup
+Add to your `appveyor.yml` file.
+```yml
+image: Visual Studio 2015
 
-Start by restoring the nuget packages and building the solution.
+before_build:
+- nuget restore
+- choco install opencover.portable
+- choco install codecov
 
-## Generate the Coverage File
+build:
+  project: CodecovProject.sln
+  verbosity: minimal
 
+test_script:
+- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\MyUnitTests\bin\Debug\MyUnitTests.dll -noshadow" -filter:"+[UnitTestTargetProject*]* -[MyUnitTests*]*" -output:".\MyProject_coverage.xml"
+- codecov -f "MyProject_coverage.xml
+```
+### Producing Coverage Reports
 Coverage is generated using [OpenCover](https://github.com/OpenCover/opencover). You can obtain it from [NuGet](https://www.nuget.org/packages/opencover) or [Chocolatey](https://chocolatey.org/packages/opencover.portable). If we run the following command in PowerShell to install OpenCover via Chocolatey, 
 
 ```powershell
@@ -22,9 +33,9 @@ the OpenCover commandline will become available.
 
 Generation of coverage report is slighly different depending on the .NET platform of your test projects.
 
-### .NET Framework project
+#### .NET Framework project
 
-#### xUnit
+##### xUnit
 
 First install the xUnit console runner via [Nuget](https://www.nuget.org/packages/xunit.runner.console/2.3.0-beta1-build3642) or [Chocolatey](https://chocolatey.org/packages/XUnit). If we run the following in PowerShell to install xUnit via Chocolatey
 
@@ -40,7 +51,7 @@ OpenCover.Console.exe -register:user -target:"xunit.console.x86.exe" -targetargs
 
 Then a coverage report will be generated.
 
-#### MSTest
+##### MSTest
 
 Execute the following in your solution's root,
 
@@ -51,7 +62,7 @@ OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft V
 where you may need to change the `-target` flag to point to the correct version of MSTest.
 
 
-### .NET Core project
+#### .NET Core project
 
 If you don't yet have .NET Core SDK installed, install it
 
@@ -73,7 +84,7 @@ OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe
 
 where `-oldstyle` switch is necessary, because .NET Core uses `System.Private.CoreLib` instead of `mscorlib` and thus `OpenCover` can't use  `mscorlib` for code instrumentation. You may also need to change the location of `dotnet.exe` to depending on the installed location.
 
-## Uploading Report
+### Uploading Report
 
 Many options exit for uploading reports to Codecov. Three commonly used uploaders for .NET are
 
@@ -83,7 +94,7 @@ Many options exit for uploading reports to Codecov. Three commonly used uploader
 
 For OS X and Linux builds, the recommended uploader is bash. For windows builds, all three uploaders work, but Codecov-exe does not require any dependencies. For example, the bash uploader and python uploader would require bash or python to be installed. This may or may not be an option.
 
-### Codecov-exe
+#### Codecov-exe
 
 First install Codecov-exe via [Nuget](https://www.nuget.org/packages/Codecov/) or [Chocolatey](https://chocolatey.org/packages/codecov). If we run the following in PowerShell to install it via Chocolatey
 
@@ -99,7 +110,7 @@ and then run the following in PowerShell
 
 the report will be uploaded.
 
-### Bash
+#### Bash
 
 In bash run the following to upload the report
 
@@ -109,7 +120,7 @@ chmod +x codecov
 ./codecov -f "MyProject_coverage.xml" -t <your upload token>
 ```
 
-### Python
+#### Python
  
 First installed python (if you don't have it already). A simple way to install python is [Chocolatey](https://chocolatey.org/packages/python)
 
@@ -186,10 +197,18 @@ test_script:
 - codecov -f "MyProject_coverage.xml"
 ```
 
-## Cake.Codecov
+## Caveats
+### Private Repo
+Repository tokens are required for (a) all private repos, (b) public repos not using Travis-CI, CircleCI or AppVeyor. Find your repository token at Codecov and provide via appending `-t <your upload token>` to you where you upload reports e.g. `.\codecov -f "MyProject_coverage.xml" -t <your upload token>`
 
-If you use [Cake](http://cakebuild.net/) (C# Make) for your build automation, there is a [Cake.Codecov](http://cakebuild.net/dsl/codecov/) addin available. Cake also has built in support for [OpenCover](http://cakebuild.net/dsl/opencover/). It makes using OpenCover and Codecov-exe really easy!
+## Support
+### Contact
+- Intercom (in-app messanger)
+- Email: [support@codecov.io](mailto:support@codecov.io)
+- Slack: [slack.codecov.io](https://slack.codecov.io)
+- [gh/codecov/support](https://github.com/codecov/support)
 
-## Sample Project
+1. More documentation at https://docs.codecov.io
+2. Configure codecov through the `codecov.yml`  https://docs.codecov.io/docs/codecov-yaml
 
-An example C# project using AppVeyor, xUnit, OpenCover, and Codecov-exe is [DotNetAnalyzers/StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers).
+[1]: https://codecov.io/
