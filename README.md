@@ -193,3 +193,5 @@ If you use [Cake](http://cakebuild.net/) (C# Make) for your build automation, th
 ## Sample Project
 
 An example C# project using AppVeyor, xUnit, OpenCover, and Codecov-exe is [DotNetAnalyzers/StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers).
+
+We are happy to help if you have any questions. Please contact email our Support at [support@codecov.io](mailto:support@codecov.io)
