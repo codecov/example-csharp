@@ -16,5 +16,10 @@
         {
             return pintFirstNumber / pintSecondNumber;
         }
+
+        public int MultipleNumbers(int pintFirstNumber, int pintSecondNumber)
+        {
+            return pintFirstNumber * pintSecondNumber;
+        }
     }
 }
