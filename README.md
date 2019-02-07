@@ -75,7 +75,7 @@ where `-oldstyle` switch is necessary, because .NET Core uses `System.Private.Co
 
 ## Uploading Report
 
-Many options exit for uploading reports to Codecov. Three commonly used uploaders for .NET are
+Many options exist for uploading reports to Codecov. Three commonly used uploaders for .NET are
 
 1. [Codecov-exe](https://github.com/codecov/codecov-exe) (C# source code)
 2. [Bash](https://github.com/codecov/codecov-bash)
